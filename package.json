@@ -4,7 +4,7 @@
   "private": true,
   "packageManager": "pnpm@11.23.0",
   "engines": {
-    "node": ">=20.18.0"
+    "node": "20.x"
   },
   "scripts": {
     "dev": "next dev",
@@ -13,7 +13,7 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "db:generate": "drizzle-kit generate",
-    "db:migrate": "tsx scripts/migrate.ts",
+    "db:migrate": "node scripts/migrate.mjs",
     "db:seed:dev": "node scripts/seed-dev-identity.mjs",
     "test": "vitest run",
     "test:watch": "vitest"

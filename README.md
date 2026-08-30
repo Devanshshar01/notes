@@ -238,3 +238,26 @@ The current implementation reads a dev-only identity from environment variables.
 - Production auth (the dev identity stub is for local + tests only)
 - Trash / restore UI for soft-deleted notes
 - Cross-tab editing coordination
+
+## Deploying to Vercel
+
+The repo ships a `vercel.json` that pins the build/install commands so the project is self-describing:
+
+- `installCommand`: `corepack enable && pnpm install --frozen-lockfile` (uses the `packageManager: pnpm@11.23.0` pin)
+- `buildCommand`: `pnpm run build` (which runs `next build`)
+- `framework`: `nextjs`
+- `regions`: `iad1` (change in `vercel.json` if your Neon DB lives elsewhere)
+
+Steps:
+
+1. Apply the migration to your production database first. Either:
+   - Run `pnpm db:migrate` locally with `DATABASE_URL` pointing at your Neon DB, or
+   - Paste the contents of `drizzle/0000_initial.sql` into the Neon SQL Editor. The script is idempotent (`CREATE … IF NOT EXISTS`).
+2. Push the repo to GitHub.
+3. Import the repo in Vercel.
+4. Add environment variables under Project → Settings → Environment Variables:
+   - `DATABASE_URL` — your Neon **pooled** connection string (`?sslmode=require`).
+   - (Optional, for inspection) `NOTES_DEV_UI` — **ignored in production** by the code at `src/server/dev/dev-ui.ts:23`, so this won't help in prod. Use only locally.
+   - (Optional) `DEV_AUTH_USER_ID` + `DEV_AUTH_SPACE_ID` — only meaningful if you also seed a matching row in the `notes_dev_identity` schema. Recommended for preview environments; not appropriate for production.
+5. Leave the **Install Command**, **Build Command**, and **Output Directory** at their defaults. The `vercel.json` in the repo takes precedence over the dashboard settings.
+6. Deploy. The first request will hit `/notes` and return a friendly 401 unless you set the dev auth vars above. There is intentionally no production auth in this step.
