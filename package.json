@@ -1,0 +1,57 @@
+{
+  "name": "couple-space-shared-notes",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@11.23.0",
+  "engines": {
+    "node": ">=20.18.0"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx scripts/migrate.ts",
+    "db:seed:dev": "node scripts/seed-dev-identity.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@tiptap/extension-placeholder": "2.10.3",
+    "@tiptap/extension-task-item": "2.10.3",
+    "@tiptap/extension-task-list": "2.10.3",
+    "@tiptap/extension-underline": "2.10.3",
+    "@tiptap/pm": "2.10.3",
+    "@tiptap/react": "2.10.3",
+    "@tiptap/starter-kit": "2.10.3",
+    "drizzle-orm": "0.38.3",
+    "next": "15.1.6",
+    "pg": "8.13.1",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "zod": "3.24.1"
+  },
+  "optionalDependencies": {
+    "@tailwindcss/oxide-win32-x64-msvc": "4.1.13"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "3.2.0",
+    "@next/eslint-plugin-next": "15.1.6",
+    "@tailwindcss/postcss": "4.1.13",
+    "@types/node": "22.10.7",
+    "@types/pg": "8.11.10",
+    "@types/react": "19.0.7",
+    "@types/react-dom": "19.0.3",
+    "drizzle-kit": "0.30.1",
+    "eslint": "9.18.0",
+    "eslint-config-next": "15.1.6",
+    "eslint-plugin-react-hooks": "5.1.0",
+    "postcss": "8.5.1",
+    "tailwindcss": "4.1.13",
+    "tsx": "4.19.2",
+    "typescript": "5.7.3",
+    "vitest": "2.1.8"
+  }
+}

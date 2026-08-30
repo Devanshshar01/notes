@@ -1,0 +1,6 @@
+allowBuilds:
+  "@tailwindcss/oxide": true
+  "@tailwindcss/oxide-win32-x64-msvc": true
+  esbuild: true
+  sharp: true
+  unrs-resolver: true

@@ -1,0 +1,149 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #fafaf9;
+  --color-surface: #ffffff;
+  --color-ink: #1c1917;
+  --color-ink-muted: #57534e;
+  --color-line: #e7e5e4;
+  --color-accent: #b45309;
+  --color-accent-soft: #fed7aa;
+
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+
+  --radius-soft: 0.875rem;
+}
+
+html,
+body {
+  height: 100%;
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  min-height: 100dvh;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-color-scheme: dark) {
+  html,
+  body {
+    background-color: #0c0a09;
+    color: #f5f5f4;
+  }
+
+  :root {
+    --color-bg: #0c0a09;
+    --color-surface: #1c1917;
+    --color-ink: #f5f5f4;
+    --color-ink-muted: #a8a29e;
+    --color-line: #292524;
+  }
+}
+
+.prose-notes :where(h1) {
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-top: 1.2em;
+  margin-bottom: 0.4em;
+  line-height: 1.2;
+}
+.prose-notes :where(h2) {
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-top: 1.1em;
+  margin-bottom: 0.35em;
+  line-height: 1.25;
+}
+.prose-notes :where(h3) {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 1em;
+  margin-bottom: 0.3em;
+  line-height: 1.3;
+}
+.prose-notes :where(p) {
+  margin: 0 0 0.7em 0;
+}
+.prose-notes :where(ul) {
+  list-style: disc;
+  padding-left: 1.4em;
+  margin: 0 0 0.7em 0;
+}
+.prose-notes :where(ol) {
+  list-style: decimal;
+  padding-left: 1.4em;
+  margin: 0 0 0.7em 0;
+}
+.prose-notes :where(li) {
+  margin: 0.15em 0;
+}
+.prose-notes :where(ul[data-type="taskList"]) {
+  list-style: none;
+  padding-left: 0;
+  margin: 0 0 0.7em 0;
+}
+.prose-notes :where(ul[data-type="taskList"] li) {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5em;
+  margin: 0.2em 0;
+}
+.prose-notes :where(ul[data-type="taskList"] li > label) {
+  margin-top: 0.35em;
+  user-select: none;
+  flex-shrink: 0;
+}
+.prose-notes :where(ul[data-type="taskList"] li > div) {
+  flex: 1;
+  min-width: 0;
+}
+.prose-notes :where(ul[data-type="taskList"] input[type="checkbox"]) {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--color-ink);
+  cursor: pointer;
+}
+.prose-notes :where(ul[data-type="taskList"] li[data-checked="true"] > div) {
+  text-decoration: line-through;
+  color: var(--color-ink-muted);
+}
+.prose-notes :where(hr) {
+  border: 0;
+  border-top: 1px solid var(--color-line);
+  margin: 1.2em 0;
+}
+.prose-notes :where(strong) {
+  font-weight: 700;
+}
+.prose-notes :where(em) {
+  font-style: italic;
+}
+.prose-notes :where(u) {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.prose-notes :where(.is-editor-empty:first-child::before) {
+  content: attr(data-placeholder);
+  float: left;
+  color: var(--color-ink-muted);
+  opacity: 0.6;
+  pointer-events: none;
+  height: 0;
+}
