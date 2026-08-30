@@ -27,7 +27,7 @@
     "@tiptap/react": "2.10.3",
     "@tiptap/starter-kit": "2.10.3",
     "drizzle-orm": "0.38.3",
-    "next": "15.1.6",
+    "next": "15.1.11",
     "pg": "8.13.1",
     "react": "19.0.0",
     "react-dom": "19.0.0",
