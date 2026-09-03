@@ -7,5 +7,5 @@ export default defineConfig({
   out: "./drizzle",
   dialect: "postgresql",
   dbCredentials: { url },
-  schemaFilter: ["notes", "notes_dev_identity"],
+  schemaFilter: ["notes", "notes_dev_identity", "notes_auth"],
 });
