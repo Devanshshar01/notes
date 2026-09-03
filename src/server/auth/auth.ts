@@ -28,7 +28,7 @@ function syntheticEmail(subject: string): string {
 }
 
 export const auth = betterAuth({
-  baseURL: process.env["BETTER_AUTH_URL"] ?? (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3002"),
+  baseURL: process.env["BETTER_AUTH_URL"] ?? (process.env.NODE_ENV === "production" ? "https://notes-rust-five.vercel.app" : "http://localhost:3002"),
   trustedOrigins: [
     "https://notes-rust-five.vercel.app",
     "http://localhost:3002",
