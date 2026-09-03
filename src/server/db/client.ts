@@ -5,7 +5,7 @@ import * as schema from "@/server/db/schema";
 
 loadEnv();
 
-const databaseUrl = process.env["DATABASE_URL"];
+const databaseUrl = process.env["DATABASE_URL"]?.replace("sslmode=require", "sslmode=verify-full");
 if (!databaseUrl) {
   throw new Error(
     "DATABASE_URL is not set. Add it to .env.local (see .env.example).",
