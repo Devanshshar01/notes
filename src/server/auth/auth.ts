@@ -15,10 +15,14 @@ const OUR_SPACE_ISSUER =
   process.env["OUR_SPACE_ISSUER"] ?? "https://our-space-woad.vercel.app";
 
 const NOTES_CLIENT_ID = process.env["NOTES_OAUTH_CLIENT_ID"] ?? "notes";
+const NOTES_BASE_URL =
+  process.env["BETTER_AUTH_URL"] ??
+  (process.env.NODE_ENV === "production"
+    ? "https://notes-rust-five.vercel.app"
+    : "http://localhost:3002");
 const NOTES_REDIRECT_URI =
   process.env["NOTES_OAUTH_REDIRECT_URI"] ??
-  (process.env["BETTER_AUTH_URL"] ?? "http://localhost:3002") +
-    "/api/auth/oauth2/callback/our-space";
+  `${NOTES_BASE_URL}/api/auth/oauth2/callback/our-space`;
 
 function syntheticEmail(subject: string): string {
   return `federated-${createHash("sha256")
@@ -28,10 +32,10 @@ function syntheticEmail(subject: string): string {
 }
 
 export const auth = betterAuth({
-  baseURL: process.env["BETTER_AUTH_URL"] ?? (process.env.NODE_ENV === "production" ? "https://notes-rust-five.vercel.app" : "http://localhost:3002"),
+  baseURL: NOTES_BASE_URL,
   trustedOrigins: [
     "https://notes-rust-five.vercel.app",
-    "http://localhost:3002",
+    ...(process.env.NODE_ENV !== "production" ? ["http://localhost:3002"] : []),
   ],
   secret: process.env["BETTER_AUTH_SECRET"] || "default_secret_please_change_this_in_production",
   database: drizzleAdapter(db, {
